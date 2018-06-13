@@ -38,4 +38,4 @@ print("\nYou've opened the chest and there are some new items in inventory:", in
 inventory += chest
 print("\nAnother try:", inventory)
 
-input("\nPress Enter to exit")
+input("\nPress Enter to exit.")
