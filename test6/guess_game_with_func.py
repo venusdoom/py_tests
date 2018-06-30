@@ -16,9 +16,14 @@ def ask_number(question, min, max, step=1):
     """Ask user to enter a number from min to max."""
     user_number = None
     while user_number not in range(min, max, step):
-        user_number = int(input(question))
-        if user_number not in range(min, max, step):
-            print("The number is out of range (1-100).")
+        try:
+            user_number = int(input(question))
+        except ValueError as error:
+            print("Wrong input:", error)
+            print("Please, enter a number in range of (1-100).")
+        else:
+            if user_number not in range(min, max, step):
+                print("The number is out of range (1-100).")
     return user_number
 
 
