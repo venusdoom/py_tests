@@ -1,0 +1,27 @@
+Theme: Colors
+Difficulty: Easy
+Question: How many colors in a rainbow?
+1. six
+2. nine
+3. eight
+4. seven
+4
+Explanation: Red, orange, yellow, green, blue, indigo and violet.
+Theme: Colors
+Difficulty: Medium
+Question: What color is the clear sky at 13.00?
+1. red
+2. green
+3. blue
+4. yellow
+3
+Explanation: Usually it is how we see the atmosphere at daytime.
+Theme: Colors
+Difficulty: Hard
+Question: My favourite color is?
+1. black
+2. white
+3. violet
+4. indigo
+1
+Explanation: Just try to guess it =).

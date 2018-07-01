@@ -36,7 +36,7 @@ def random_number(min, max):
 def main():
     instruction()
     rand_numb = random_number(1, 100)
-    user_numb = ask_number("Enter the number: ", 1, 100)
+    user_numb = ask_number("Enter the number: ", 1, 101)
     counter = 1
     while counter < 8:
         if user_numb == rand_numb:
