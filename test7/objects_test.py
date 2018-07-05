@@ -8,6 +8,12 @@ class Critter(object):
         self.hunger = hunger
         self.boredom = boredom
 
+    def __str__(self):
+        """Describes main attributes of Critter class"""
+        description = "Object class Critter."
+        description += "\nName: " + self.name + "\nMood: " + self.mood + "\nHunger: " + str(self.hunger) + "\nBoredom: " + str(self.boredom) + "\n"
+        return description
+
     def __pass_time(self):
         """increase hunger and boredom level"""
         self.hunger += 1
@@ -63,9 +69,23 @@ def main():
         elif choice == "1":
             crit.talk()
         elif choice == "2":
-            crit.eat()
+            try:
+                food = int(input("How many food points do you want to give to the pet (enter a number): "))
+            except ValueError as error:
+                print("Input error:", error)
+                print("Using default value for food (4).")
+                food = 4
+            crit.eat(food)
         elif choice == "3":
-            crit.play()
+            try:
+                fun = int(input("How many fun points do you want to give to the pet (enter a number): "))
+            except ValueError as error:
+                print("Input error:", error)
+                print("Using default value for fun (4).")
+                fun = 4
+            crit.play(fun)
+        elif choice == "4":
+            print(crit)
         else:
             print("Sorry, there is no option:", choice, "\n")
 
