@@ -91,4 +91,4 @@ def main():
 
 
 main()
-input("Enter Enter to exit.")
+input("Press Enter to exit.")

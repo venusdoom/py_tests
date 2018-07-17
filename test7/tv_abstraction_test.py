@@ -60,4 +60,4 @@ def main():
 
 
 main()
-input("\nEnter Enter to exit.")
+input("\nPress Enter to exit.")
