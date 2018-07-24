@@ -1,15 +1,16 @@
 # A module for a simple game
 
 
-class Player:
-    """Describes a game player object"""
+class CardPlayer:
+    """Describes a card player as object"""
 
     def __init__(self, name, score=0):
         self.name = name
+        self.cards = []
         self.score = score
 
     def __str__(self):
-        rep = self.name + "\t" + str(self.score)
+        rep = "\tName: " + self.name + "\n\tCards: " + ', '.join(map(str, self.cards)) + "\n\tScore: " + str(self.score)
         return rep
 
 
@@ -26,7 +27,3 @@ def ask_number(question, low, high):
         response = int(input(question))
     return response
 
-
-if __name__ == "__main__":
-    print("This module should be imported.")
-    input("Press 'Enter' to exit.")

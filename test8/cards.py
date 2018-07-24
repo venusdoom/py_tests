@@ -1,73 +1,99 @@
-# A module for a card game classes
+# A module for standard card deck
 
 
-class Card:
-    """Describes a game card object."""
-    RANKS = ["A", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
-    SUITS = ["c", "d", "h", "s"]
+class UsualCardSet:
+    """Describes a standard card"""
 
-    def __init__(self, rank, suit, face_up=True):
-        self.rank = rank
+    SUITS = ["Spades", "Hearts", "Diamonds", "Clubs"]
+    RANKS = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
+
+    def __init__(self, suit=None, rank=None):
         self.suit = suit
-        self.is_face_up = face_up
+        self.rank = rank
 
     def __str__(self):
-        if self.is_face_up:
-            rep = self.rank + self.suit
-        else:
-            rep = "XX"
+        rep = self.suit + "-" + self.rank
         return rep
 
-    def flip(self):
-        self.is_face_up = not self.is_face_up
+    @property
+    def value(self):
+        if self.rank == "Ace":
+            v = 1
+        elif self.rank in ("Jack", "Queen", "King"):
+            v = 10
+        elif not self.rank:
+            v = None
+        else:
+            v = int(self.rank)
+        return v
 
 
-class Hand:
-    """A card set that player have"""
+class Deck:
+    """Describes a deck object as a set of card objects"""
+
     def __init__(self):
-        self.cards = []
+        self.deck = []
 
     def __str__(self):
-        if self.cards:
-            rep = ""
-            for card in self.cards:
-                rep += str(card) + "\t"
-        else:
-            rep = "No cards"
+        rep = ', '.join(map(str, self.deck))
         return rep
 
-    def clear(self):
-        self.cards = []
-
-    def add(self, card):
-        self.cards.append(card)
-
-    def give(self, card, other_hand):
-        self.cards.remove(card)
-        other_hand.add(card)
-
-
-class Deck(Hand):
-    """A deck of game cards"""
-    def populate(self):
-        for suit in Card.SUITS:
-            for rank in Card.RANKS:
-                self.add(Card(rank, suit))
+    def create_deck(self, card_set):
+        for rank in card_set.RANKS:
+            for suit in card_set.SUITS:
+                self.deck.append(card_set(suit, rank))
 
     def shuffle(self):
         import random
-        random.shuffle(self.cards)
+        random.shuffle(self.deck)
+        print("\nThe deck was shuffled.")
 
-    def deal(self, hands, per_hand=1):
-        for rounds in range(per_hand):
-            for hand in hands:
-                if self.cards:
-                    top_card = self.cards[0]
-                    self.give(top_card, hand)
-                else:
-                    print("No cards.")
+    def give_card(self, player, number=1):
+        if self.deck:
+            for i in range(number):
+                print("Giving some card from deck to", player.name)
+                player.cards.append(self.deck[0])
+                player.score += self.deck[0].value
+                del self.deck[0]
+        else:
+            print("No cards in deck.")
 
 
-if __name__ == "__main__":
-    print("This module should be imported.")
-    input("Press 'Enter' to exit.")
+# debug!
+card_set = UsualCardSet()
+print(card_set.SUITS)
+deck = Deck()
+deck += card_set
+#deck.create_deck(card_set)
+print("\n", "New deck:\n", deck)
+# debug!
+
+# debug!
+debug = False
+if debug:
+    card = UsualCardSet("S", "2")
+    print("Predefined card:", card)
+    print("Value of predefined card:", card.value)
+
+    deck = Deck()
+    deck.create_deck(UsualCardSet)
+    print("\n", "New deck:\n", deck)
+
+    deck.shuffle()
+    print("\n", "Shuffled deck:\n", deck)
+
+    import test8.card_player
+
+    player1 = test8.card_player.CardPlayer("John")
+    player2 = test8.card_player.CardPlayer("Bill")
+    players = [player1, player2]
+
+    print("\nDealing deck to players:")
+    while deck.deck:
+        for player in players:
+            deck.give_card(player, 2)
+
+    print("\n", player1)
+    print("\n", player2)
+    print("\n", "Deck after dealing:\n", deck)
+# debug!
